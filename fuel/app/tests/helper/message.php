@@ -6,7 +6,7 @@ use \Mockery as Mock;
  */
 class Test_Helper_Message extends TestCase
 {
-	public function tearDown()
+	protected function tearDown()
     {
         \Mockery::close();
     }

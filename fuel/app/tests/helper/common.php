@@ -7,7 +7,7 @@ class Test_Helper_Common extends TestCase
 	/**
 	 * @before
 	 */
-	public function truncate_data()
+	protected function truncate_data()
 	{
 		DBUtil::truncate_table('messages');
 	}
