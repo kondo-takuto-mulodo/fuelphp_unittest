@@ -1,2 +1,8 @@
 fuel/app/logs/*/*/*
 fuel/app/cache/*/*
+coverage-html/
+.env
+*.tmp
+fuel/vendor/
+fuel/app/config/*/migrations.php
+.DS_Store

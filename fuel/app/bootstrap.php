@@ -2,6 +2,12 @@
 // Bootstrap the framework DO NOT edit this
 require COREPATH.'bootstrap.php';
 
+// Load ENV from .env by Dotenv
+require realpath(__DIR__.'/../').'/vendor/autoload.php';
+$dotenv = new Dotenv\Dotenv(realpath(__DIR__.'/../../').'/');
+$dotenv->load();
+
+
 \Autoloader::add_classes(array(
 	// Add classes you want to override here
 	// Example: 'View' => APPPATH.'classes/view.php',

@@ -25,7 +25,13 @@
         "fuel/parser": "dev-1.7/master",
         "fuelphp/upload": "2.0.2",
         "monolog/monolog": "1.5.*",
-        "michelf/php-markdown": "1.4.0"
+        "michelf/php-markdown": "1.4.0",
+        "vlucas/phpdotenv": "^2.2"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "eviweb/fuelphp-phpcs": "~1",
+        "phpunit/phpunit": "~4.0"
     },
     "suggest": {
         "dwoo/dwoo" : "Allow Dwoo templating with the Parser package",
@@ -47,6 +53,12 @@
     "scripts": {
         "post-install-cmd": [
             "php oil r install"
+        ],
+        "fuelphpcs": [
+            "./fuel/vendor/eviweb/fuelphp-phpcs/bin/fuelphpcs --standard=FuelPHP fuel/app/classes/"
+        ],
+        "test": [
+            "php oil test"
         ]
     },
     "minimum-stability": "stable"

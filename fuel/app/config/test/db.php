@@ -8,9 +8,9 @@
 return array(
 	'default' => array(
 		'connection'  => array(
-			'dsn'        => 'mysql:host=localhost;dbname=fuel_test',
-			'username'   => 'fuel_app',
-			'password'   => 'super_secret_password',
+	      'dsn'        => "mysql:host=".getenv('HOST_MYSQL').";dbname=".getenv('MYSQL_DATABASE'),
+	      'username'   => getenv("MYSQL_USER"),
+	      'password'   => getenv("MYSQL_PASSWORD"),
 		),
 	),
 );
