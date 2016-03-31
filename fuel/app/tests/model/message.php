@@ -17,7 +17,7 @@ class Test_Model_Message extends TestCase
 	 */
 	public function test_get_all($input,$expect)
 	{
-		Helper_Common::install_data($input,'messages');
+		(new Test_Data_Import_Array_Data("messages",$input))->seed();
 		$result = Model_Message::get_all();
 
 		foreach ($result as $key => $item)
@@ -46,6 +46,11 @@ class Test_Model_Message extends TestCase
 				array(
 						array_merge($normal_messages,$hot_messages),
 						array_merge($normal_messages,$hot_messages),
+					),
+				// no record
+				array(
+						array(),
+						array(),
 					)
 			);
 	}

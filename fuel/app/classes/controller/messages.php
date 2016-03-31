@@ -22,7 +22,7 @@ class Controller_Messages extends Controller_Template
 
 			Helper_Message::update_views_for_message($data['message']);
 
-			$this->template->title = 'Message';
+			$this->template->title = 'View Message';
 			$this->template->content = View::forge('messages/view', $data);
 		}
 
@@ -33,7 +33,7 @@ class Controller_Messages extends Controller_Template
 				$this->template->set_global('message', $message, false);
 			}
 
-			$this->template->title = 'Messages';
+			$this->template->title = 'New Message';
 			$this->template->content = View::forge('messages/create');
 		}
 
@@ -64,7 +64,7 @@ class Controller_Messages extends Controller_Template
 				Session::set_flash('error', $val->error());
 			}
 
-			$this->template->title = 'Messages';
+			$this->template->title = 'New Message';
 			$this->template->content = View::forge('messages/create');
 		}
 
@@ -80,7 +80,7 @@ class Controller_Messages extends Controller_Template
 
 			$this->template->set_global('message', $message, false);
 
-			$this->template->title = 'Message';
+			$this->template->title = 'Edit Message';
 			$this->template->content = View::forge('messages/edit');
 		}
 
@@ -118,7 +118,7 @@ class Controller_Messages extends Controller_Template
 				$this->template->set_global('message', $message, false);
 			}
 
-			$this->template->title = 'Message';
+			$this->template->title = 'Edit Message';
 			$this->template->content = View::forge('messages/edit');
 		}
 

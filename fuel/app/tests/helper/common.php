@@ -22,49 +22,6 @@ class Test_Helper_Common extends TestCase
 	}
 
 	/**
-	 * @dataProvider data_insert_data
-	 */
-	public function test_insert_data($input,$expect)
-	{
-		Helper_Common::install_data($input['data'],$input['table']);
-		$result = Model_Message::get_all();
-
-		$this->assertEquals($expect, count($result));
-	}
-
-	public function data_insert_data()
-	{
-		$messages        = new Test_Data_Messages;
-		$hot_messages    = $messages->get_as_array(Test_Data_Messages::HOT);
-		return array(
-				// items is null
-				array(
-						array(
-								'data' => null,
-								'table' => 'messages'
-							),
-						0
-					),
-				// table is null
-				array(
-						array(
-								'data' => array(),
-								'table' => null
-							),
-						0
-					),
-				// get 1 record
-				array(
-						array(
-								'data' => $hot_messages,
-								'table' => 'messages'
-							),
-						count($hot_messages)
-					)
-			);
-	}
-
-	/**
 	 * @dataProvider data_get_hot_items
 	 */
 	public function test_get_hot_items($input,$expect)

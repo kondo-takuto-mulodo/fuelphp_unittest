@@ -1,6 +1,15 @@
 <?php
-class Test_Data_Messages extends Test_Data_Abstract
+class Test_Data_Messages extends Test_Data_Abstract_Data
 {
+	const DEFINE_OBJECT = 'define_object';
+
+	public $define_object;
+
+	public function set_define_object($array_object)
+	{
+		$this->define_object = $array_object;
+	}
+
 	const HOT = 'hot_messages';
 
 	public $hot_messages = [

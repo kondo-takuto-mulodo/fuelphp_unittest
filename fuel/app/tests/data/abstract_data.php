@@ -1,5 +1,5 @@
 <?php
-abstract class Test_Data_Abstract
+abstract class Test_Data_Abstract_Data
 {
 	public function get_as_array($dataname)
 	{
