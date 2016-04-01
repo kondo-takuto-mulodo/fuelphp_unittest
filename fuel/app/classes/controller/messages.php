@@ -18,6 +18,7 @@ class Controller_Messages extends Controller_Template
 			{
 				Session::set_flash('error', 'Could not find message #'.$id);
 				Response::redirect('messages');
+				return;
 			}
 
 			Helper_Message::update_views_for_message($data['message']);
@@ -53,6 +54,7 @@ class Controller_Messages extends Controller_Template
 				{
 					Session::set_flash('success', 'Added message #'.$message->id.'.');
 					Response::redirect('messages');
+					return;
 				}
 				else
 				{
@@ -76,6 +78,7 @@ class Controller_Messages extends Controller_Template
 			{
 				Session::set_flash('error', 'Could not find message #'.$id);
 				Response::redirect('messages');
+				return;
 			}
 
 			$this->template->set_global('message', $message, false);
@@ -92,6 +95,7 @@ class Controller_Messages extends Controller_Template
 			{
 				Session::set_flash('error', 'Could not find message #'.$id);
 				Response::redirect('messages');
+				return;
 			}
 
 			$val = Model_Message::validate('edit');
@@ -104,8 +108,8 @@ class Controller_Messages extends Controller_Template
 				if ($message->save())
 				{
 						Session::set_flash('success', 'Updated message #'.$id);
-
 						Response::redirect('messages');
+						return;
 				}
 				else
 				{
@@ -129,10 +133,8 @@ class Controller_Messages extends Controller_Template
 			if ($message = Model_Message::find($id))
 			{
 				$message->delete();
-
 				Session::set_flash('success', 'Deleted message #'.$id);
 			}
-
 			else
 			{
 				Session::set_flash('error', 'Could not delete message #'.$id);
