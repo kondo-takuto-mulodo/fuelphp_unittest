@@ -40,9 +40,9 @@ class Controller_Messages extends Controller_Template
 
 		public function action_create()
 		{
-			$val = Model_Message::validate('create');
+			$val = Model_Message::validate('create'.(new DateTime())->getTimestamp());
 
-			if ($val->run())
+			if ($val->run(Input::post()))
 			{
 				$message = Model_Message::forge(array(
 					'name'                                    => Input::post('name'),
@@ -50,16 +50,10 @@ class Controller_Messages extends Controller_Template
 					'views'                                   => 0,
 				));
 
-				if ($message and $message->save())
-				{
-					Session::set_flash('success', 'Added message #'.$message->id.'.');
-					Response::redirect('messages');
-					return;
-				}
-				else
-				{
-					Session::set_flash('error', 'Could not save message.');
-				}
+				$message->save();
+				Session::set_flash('success', 'Added message #'.$message->id.'.');
+				Response::redirect('messages');
+				return;
 			}
 			else
 			{
@@ -98,23 +92,17 @@ class Controller_Messages extends Controller_Template
 				return;
 			}
 
-			$val = Model_Message::validate('edit');
+			$val = Model_Message::validate('edit'.(new DateTime())->getTimestamp());
 
-			if ($val->run())
+			if ($val->run(Input::post()))
 			{
 				$message->name = Input::post('name');
 				$message->message = Input::post('message');
 
-				if ($message->save())
-				{
-						Session::set_flash('success', 'Updated message #'.$id);
-						Response::redirect('messages');
-						return;
-				}
-				else
-				{
-						Session::set_flash('error', 'Could not update message #'.$id);
-				}
+				$message->save();
+				Session::set_flash('success', 'Updated message #'.$id);
+				Response::redirect('messages');
+				return;
 			}
 			else
 			{

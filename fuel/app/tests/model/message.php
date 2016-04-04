@@ -59,7 +59,7 @@ class Test_Model_Message extends TestCase
 	{
 		$messages  = new Test_Data_Messages;
 		$data_test = $messages->get_as_array(Test_Data_Messages::VALIDATE);
-		$val = Model_Message::validate('create');
+		$val = Model_Message::validate('test');
 
 		foreach ($data_test as $value) {
 			$this->assertEquals(

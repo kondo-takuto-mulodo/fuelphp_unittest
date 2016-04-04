@@ -132,25 +132,84 @@ class Test_Controller_Messages extends TestCase {
 		$this->assertEquals($errors,"Could not delete message #100");
 	}
 
-		public function test_action_create()
+	public function test_action_create_success()
 	{
-		// $data_csv = new Test_Data_Import_CSV_Data('messages','/messages/messages.csv');
-		// $data_csv->seed();
+		sleep(1);
+		$_POST["name"] = "Message 100";
+    $_POST["message"] = "Message 100";
 
-		// $message_expect = Model_Message::find(1);
-
-		// $response = Request::forge('messages/delete/' . $message_expect->id)->execute()->response();
-		// $this->assertEquals($message,$message_expect);
+		$response = Request::forge('messages/create',false)
+									->set_method('POST')
+									->execute()
+									->response();
+		$success = Session::get_flash('success');
+		$this->assertStringStartsWith('Added message',$success);
 	}
 
-			public function test_action_update()
+	public function test_action_create_error()
 	{
-		// $data_csv = new Test_Data_Import_CSV_Data('messages','/messages/messages.csv');
-		// $data_csv->seed();
+		sleep(1);
+		$_POST["name"] = "Message 100";
+    $_POST["message"] = "";
 
-		// $message_expect = Model_Message::find(1);
+		$response = Request::forge('messages/create',false)
+									->set_method('POST')
+									->execute()
+									->response();
+		$success = Session::get_flash('success');
+		$this->assertNotEquals("Added message #1.",$success);
+	}
 
-		// $response = Request::forge('messages/delete/' . $message_expect->id)->execute()->response();
-		// $this->assertEquals($message,$message_expect);
+	public function test_action_update_success()
+	{
+		sleep(1);
+		$data_csv = new Test_Data_Import_CSV_Data('messages','/messages/messages.csv');
+		$data_csv->seed();
+
+		$message_expect = Model_Message::find(1);
+
+		$_POST["name"] = "Message 100";
+    $_POST["message"] = "Message 100";
+
+		$response = Request::forge('messages/update/' . $message_expect->id,false)
+									->set_method('POST')
+									->execute()
+									->response();
+		$success = Session::get_flash('success');
+		$this->assertEquals('Updated message #'.$message_expect->id,$success);
+	}
+
+	public function test_action_update_error()
+	{
+		sleep(1);
+		$data_csv = new Test_Data_Import_CSV_Data('messages','/messages/messages.csv');
+		$data_csv->seed();
+
+		$message_expect = Model_Message::find(1);
+
+		$_POST["name"] = "Message 100";
+    $_POST["message"] = "";
+
+		$response = Request::forge('messages/update/' . $message_expect->id,false)
+									->set_method('POST')
+									->execute()
+									->response();
+		$success = Session::get_flash('success');
+		$this->assertNotEquals("Updated message #1.",$success);
+	}
+
+	public function test_action_update_with_id_not_exists()
+	{
+		sleep(1);
+
+		$_POST["name"] = "Message 100";
+    $_POST["message"] = "";
+
+		$response = Request::forge('messages/update/100',false)
+									->set_method('POST')
+									->execute()
+									->response();
+		$success = Session::get_flash('success');
+		$this->assertNotEquals("Updated message #1.",$success);
 	}
 }
