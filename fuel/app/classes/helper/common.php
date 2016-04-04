@@ -23,18 +23,4 @@ class Helper_Common
 				return ($item1->{$key} == $item2->{$key}) ? 0 : ($item1->{$key} > $item2->{$key}) ? - 1 : + 1;
 			};
 		}
-
-		public static function install_data($data,$table)
-		{
-			if ( ! is_array($data) || is_null($table))
-			{
-				return;
-			}
-
-			foreach ($data as $item)
-			{
-				$query = DB::insert($table);
-				$query->set($item)->execute();
-			}
-		}
 }

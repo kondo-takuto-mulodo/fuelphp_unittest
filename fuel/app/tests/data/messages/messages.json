@@ -1,0 +1,17 @@
+[
+	{
+		"id":1,
+		"name":"hot_messages 001",
+		"message":"hot messages 001",
+		"views":10,
+		"created_at":1457672260
+	},
+	{
+		"id":2,
+		"name":"hot_messages 002",
+		"message":"hot messages 002",
+		"views":10,
+		"created_at":1457672260,
+		"deleted_at":1457672260
+	}
+]

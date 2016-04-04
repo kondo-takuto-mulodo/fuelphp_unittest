@@ -7,12 +7,17 @@
 
 ## How do use it
 
-* Step 1: run install plugin by composer
+* Step 1: copy .env.example to .env
+* Step 2: run install plugin by composer
 ```
 php composer.phar install
 ```
-* Step 2: setup .env
+* Step 3: setup .env
 * Step 3: run migrate to generate database
+```
+php oil refine migrate
+```
+or
 ```
 php oil refine migrate:current
 ```

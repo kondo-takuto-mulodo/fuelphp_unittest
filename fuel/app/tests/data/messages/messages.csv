@@ -1,0 +1,13 @@
+id,name,message,views,created_at,deleted_at
+1,"hot_messages 001","hot messages 001",10,1457672260,
+2,"hot_messages 002","hot messages 002",20,1457672260,
+3,"hot_messages 003","hot messages 003",30,1457672260,
+4,"messages 002","messages 002",0,1457672260,
+5,"messages 003","messages 001",0,1457672260,
+6,"messages 004","messages 002",0,1457672260,
+7,"messages 005","messages 001",0,1457672260,
+8,"messages 006","messages 002",0,1457672260,
+9,"messages 007","messages 001",0,1457672260,
+10,"deleted messages 008","deleted messages 002",0,1457672260,1457672260
+11,"deleted messages 009","deleted messages 001",0,1457672260,1457672260
+12,"deleted messages 010","deleted messages 002",0,1457672260,1457672260

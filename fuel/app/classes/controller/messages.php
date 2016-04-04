@@ -18,11 +18,12 @@ class Controller_Messages extends Controller_Template
 			{
 				Session::set_flash('error', 'Could not find message #'.$id);
 				Response::redirect('messages');
+				return;
 			}
 
 			Helper_Message::update_views_for_message($data['message']);
 
-			$this->template->title = 'Message';
+			$this->template->title = 'View Message';
 			$this->template->content = View::forge('messages/view', $data);
 		}
 
@@ -33,15 +34,15 @@ class Controller_Messages extends Controller_Template
 				$this->template->set_global('message', $message, false);
 			}
 
-			$this->template->title = 'Messages';
+			$this->template->title = 'New Message';
 			$this->template->content = View::forge('messages/create');
 		}
 
 		public function action_create()
 		{
-			$val = Model_Message::validate('create');
+			$val = Model_Message::validate('create'.(new DateTime())->getTimestamp());
 
-			if ($val->run())
+			if ($val->run(Input::post()))
 			{
 				$message = Model_Message::forge(array(
 					'name'                                    => Input::post('name'),
@@ -49,22 +50,17 @@ class Controller_Messages extends Controller_Template
 					'views'                                   => 0,
 				));
 
-				if ($message and $message->save())
-				{
-					Session::set_flash('success', 'Added message #'.$message->id.'.');
-					Response::redirect('messages');
-				}
-				else
-				{
-					Session::set_flash('error', 'Could not save message.');
-				}
+				$message->save();
+				Session::set_flash('success', 'Added message #'.$message->id.'.');
+				Response::redirect('messages');
+				return;
 			}
 			else
 			{
 				Session::set_flash('error', $val->error());
 			}
 
-			$this->template->title = 'Messages';
+			$this->template->title = 'New Message';
 			$this->template->content = View::forge('messages/create');
 		}
 
@@ -76,11 +72,12 @@ class Controller_Messages extends Controller_Template
 			{
 				Session::set_flash('error', 'Could not find message #'.$id);
 				Response::redirect('messages');
+				return;
 			}
 
 			$this->template->set_global('message', $message, false);
 
-			$this->template->title = 'Message';
+			$this->template->title = 'Edit Message';
 			$this->template->content = View::forge('messages/edit');
 		}
 
@@ -92,25 +89,20 @@ class Controller_Messages extends Controller_Template
 			{
 				Session::set_flash('error', 'Could not find message #'.$id);
 				Response::redirect('messages');
+				return;
 			}
 
-			$val = Model_Message::validate('edit');
+			$val = Model_Message::validate('edit'.(new DateTime())->getTimestamp());
 
-			if ($val->run())
+			if ($val->run(Input::post()))
 			{
 				$message->name = Input::post('name');
 				$message->message = Input::post('message');
 
-				if ($message->save())
-				{
-						Session::set_flash('success', 'Updated message #'.$id);
-
-						Response::redirect('messages');
-				}
-				else
-				{
-						Session::set_flash('error', 'Could not update message #'.$id);
-				}
+				$message->save();
+				Session::set_flash('success', 'Updated message #'.$id);
+				Response::redirect('messages');
+				return;
 			}
 			else
 			{
@@ -118,7 +110,7 @@ class Controller_Messages extends Controller_Template
 				$this->template->set_global('message', $message, false);
 			}
 
-			$this->template->title = 'Message';
+			$this->template->title = 'Edit Message';
 			$this->template->content = View::forge('messages/edit');
 		}
 
@@ -129,10 +121,8 @@ class Controller_Messages extends Controller_Template
 			if ($message = Model_Message::find($id))
 			{
 				$message->delete();
-
 				Session::set_flash('success', 'Deleted message #'.$id);
 			}
-
 			else
 			{
 				Session::set_flash('error', 'Could not delete message #'.$id);
